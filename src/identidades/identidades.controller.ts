@@ -8,19 +8,18 @@ import {
   Res,
   HttpStatus,
   Param,
+  Req,
 } from '@nestjs/common';
-import { response } from 'express';
-import { CreateMensajeDto } from '../domain/dto/create-mensaje-dto';
-import { MensajesService } from './mensajes.service';
+import { CreateIdentidadDto } from '../domain/dto/create-identidad-dto';
+import { IdentidadesService } from './identidades.service';
 
-@Controller('mensajes')
-export class MensajesController {
-  constructor(private mensajesServices: MensajesService) {}
-
+@Controller('identidades')
+export class IdentidadesController {
+  constructor(private identidadesServices: IdentidadesService) {}
   @Post()
-  create(@Body() createMensajeDto: CreateMensajeDto, @Res() response) {
-    this.mensajesServices
-      .createMensaje(createMensajeDto)
+  create(@Body() createIdentidadDto: CreateIdentidadDto, @Res() response) {
+    this.identidadesServices
+      .createIdentidad(createIdentidadDto)
       .then((mensaje) => {
         response.status(HttpStatus.CREATED).json(mensaje);
       })
@@ -33,7 +32,7 @@ export class MensajesController {
 
   @Get()
   getAll(@Res() response) {
-    this.mensajesServices
+    this.identidadesServices
       .getAll()
       .then((mensajesList) => {
         response.status(HttpStatus.OK).json(mensajesList);
@@ -41,18 +40,18 @@ export class MensajesController {
       .catch(() => {
         response
           .status(HttpStatus.FORBIDDEN)
-          .json({ mensaje: 'error en la obtencion de mensajes' });
+          .json({ mensaje: 'error en la obtencion de identidades' });
       });
   }
 
   @Put(':id')
   update(
-    @Body() updateMensajeDto: CreateMensajeDto,
+    @Body() updateIdentidadDto: CreateIdentidadDto,
     @Res() response,
-    @Param('id') idMensaje,
+    @Param('id') idNum,
   ) {
-    this.mensajesServices
-      .updateMensaje(idMensaje, updateMensajeDto)
+    this.identidadesServices
+      .updateIdentidad(idNum, updateIdentidadDto)
       .then((mensaje) => {
         response.status(HttpStatus.OK).json(mensaje);
       })
@@ -65,8 +64,8 @@ export class MensajesController {
 
   @Delete(':id')
   delete(@Res() response, @Param('id') idMensaje) {
-    this.mensajesServices
-      .deleteMensaje(idMensaje)
+    this.identidadesServices
+      .deleteIdentidad(idMensaje)
       .then((res) => {
         response.status(HttpStatus.OK).json(res);
       })
@@ -74,6 +73,22 @@ export class MensajesController {
         response
           .status(HttpStatus.FORBIDDEN)
           .json({ mensaje: 'error en la eliminacion del mensaje' });
+      });
+  }
+
+  @Get('/criteria')
+  buscarIdentidad(@Req() request, @Res() response) {
+    const { query } = request;
+    const cantMaxima: number = query.cantMaxima as any;
+    this.identidadesServices
+      .buscarIdentidad(cantMaxima)
+      .then((mensajesList) => {
+        response.status(HttpStatus.OK).json(mensajesList);
+      })
+      .catch(() => {
+        response
+          .status(HttpStatus.FORBIDDEN)
+          .json({ mensaje: 'error en la busqueda de identidades' });
       });
   }
 }

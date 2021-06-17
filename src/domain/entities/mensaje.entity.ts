@@ -1,15 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-
-
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Mensaje {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    nick: string;
+  @Column()
+  nick: string;
 
-    @Column()
-    mensaje: string;
-    
+  @Column()
+  mensaje: string;
 }
