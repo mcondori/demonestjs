@@ -10,11 +10,14 @@ import {
   Param,
   Req,
 } from '@nestjs/common';
-import { CreateIdentidadDto } from '../domain/dto/create-identidad-dto';
+import { CreateIdentidadDto } from './dto/create-identidad-dto';
 import { IdentidadesService } from './identidades.service';
 
 @Controller('identidades')
 export class IdentidadesController {
+  findAll(): any {
+    throw new Error('Method not implemented.');
+  }
   constructor(private identidadesServices: IdentidadesService) {}
   @Post()
   create(@Body() createIdentidadDto: CreateIdentidadDto, @Res() response) {

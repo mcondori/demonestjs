@@ -10,7 +10,7 @@ import {
   Param,
 } from '@nestjs/common';
 import { response } from 'express';
-import { CreateMensajeDto } from '../domain/dto/create-mensaje-dto';
+import { CreateMensajeDto } from './dto/create-mensaje-dto';
 import { MensajesService } from './mensajes.service';
 
 @Controller('mensajes')

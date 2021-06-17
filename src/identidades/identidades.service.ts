@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateIdentidadDto } from 'src/domain/dto/create-identidad-dto';
-import { IdentidadDto } from 'src/domain/dto/identidad-dto';
-import { Identidad } from 'src/domain/entities/identidad.entity';
+import { Identidad } from 'src/identidades/entities/identidad.entity';
 import { Repository } from 'typeorm';
+import { CreateIdentidadDto } from './dto/create-identidad-dto';
+import { IdentidadDto } from './dto/identidad-dto';
 
 @Injectable()
 export class IdentidadesService {
