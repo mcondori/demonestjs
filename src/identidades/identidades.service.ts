@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Identidad } from 'src/identidades/entities/identidad.entity';
 import { Repository } from 'typeorm';
@@ -7,6 +7,7 @@ import { IdentidadDto } from './dto/identidad-dto';
 
 @Injectable()
 export class IdentidadesService {
+  private readonly logger = new Logger(IdentidadesService.name);
   constructor(
     @InjectRepository(Identidad)
     private readonly identidadRepository: Repository<Identidad>,
@@ -22,7 +23,12 @@ export class IdentidadesService {
     const nuevo = new Identidad();
     nuevo.idNum = identidadNuevo.idNum;
     nuevo.nombres = identidadNuevo.nombres;
-    return this.identidadRepository.save(nuevo);
+    try {
+      const identidadCreado = this.identidadRepository.save(nuevo);
+      return identidadCreado;
+    } catch (error) {
+      this.logger.log(error + '');
+    }
   }
 
   async updateIdentidad(
