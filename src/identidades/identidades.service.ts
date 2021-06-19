@@ -20,9 +20,8 @@ export class IdentidadesService {
   async createIdentidad(
     identidadNuevo: CreateIdentidadDto,
   ): Promise<Identidad> {
-    const nuevo = new Identidad();
-    nuevo.idNum = identidadNuevo.idNum;
-    nuevo.nombres = identidadNuevo.nombres;
+    const nuevo = this.identidadRepository.create(identidadNuevo);
+    new Identidad();
     try {
       const identidadCreado = this.identidadRepository.save(nuevo);
       return identidadCreado;

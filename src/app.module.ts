@@ -25,7 +25,7 @@ import { IdentidadesModule } from './identidades/identidades.module';
     TypeOrmModule.forFeature([Mensaje, Identidad]),
     IdentidadesModule,
   ],
-  controllers: [AppController, MensajesController, IdentidadesController],
-  providers: [AppService, MensajesService, IdentidadesService],
+  controllers: [AppController, MensajesController],
+  providers: [AppService, MensajesService],
 })
 export class AppModule {}
