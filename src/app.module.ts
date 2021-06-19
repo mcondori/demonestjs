@@ -2,13 +2,11 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Mensaje } from './mensajes/entities/mensaje.entity';
-import { Identidad } from './identidades/entities/identidad.entity';
-import { MensajesController } from './mensajes/mensajes.controller';
-import { MensajesService } from './mensajes/mensajes.service';
-import { IdentidadesController } from './identidades/identidades.controller';
-import { IdentidadesService } from './identidades/identidades.service';
-import { IdentidadesModule } from './identidades/identidades.module';
+import { Identidad } from './modules/identidades/entities/identidad.entity';
+import { IdentidadesModule } from './modules/identidades/identidades.module';
+import { Mensaje } from './modules/mensajes/entities/mensaje.entity';
+import { MensajesController } from './modules/mensajes/mensajes.controller';
+import { MensajesService } from './modules/mensajes/mensajes.service';
 
 @Module({
   imports: [
@@ -19,10 +17,10 @@ import { IdentidadesModule } from './identidades/identidades.module';
       username: 'postgres',
       password: '12345678',
       database: 'hex',
-      entities: [Mensaje, Identidad],
+      entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: false,
     }),
-    TypeOrmModule.forFeature([Mensaje, Identidad]),
+    TypeOrmModule.forFeature([Mensaje]),
     IdentidadesModule,
   ],
   controllers: [AppController, MensajesController],

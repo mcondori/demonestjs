@@ -1,4 +1,4 @@
-import { Identidad } from 'src/identidades/entities/identidad.entity';
+import { Identidad } from 'src/modules/identidades/entities/identidad.entity';
 
 export class IdentidadDto {
   readonly identidad?: Identidad;

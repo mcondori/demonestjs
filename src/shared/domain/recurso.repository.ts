@@ -1,3 +1,1 @@
-export default interface IIdentidadRepositoy {
-  get(): Promise<boolean>;
-}
+export default class RecursoRepositoy {}

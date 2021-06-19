@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Identidad } from 'src/identidades/entities/identidad.entity';
+import { Identidad } from 'src/modules/identidades/entities/identidad.entity';
 import { Repository } from 'typeorm';
 import { CreateIdentidadDto } from './dto/create-identidad-dto';
 import { IdentidadDto } from './dto/identidad-dto';
@@ -14,6 +14,7 @@ export class IdentidadesService {
   ) {}
 
   async getAll(): Promise<Identidad[]> {
+    this.logger.log('es un log');
     return await this.identidadRepository.find();
   }
 
