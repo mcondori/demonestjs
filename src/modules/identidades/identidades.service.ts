@@ -4,13 +4,14 @@ import { Identidad } from 'src/modules/identidades/entities/identidad.entity';
 import { Repository } from 'typeorm';
 import { CreateIdentidadDto } from './dto/create-identidad-dto';
 import { IdentidadDto } from './dto/identidad-dto';
+import { IdentidadesRepository } from './identidades.repository';
 
 @Injectable()
 export class IdentidadesService {
   private readonly logger = new Logger(IdentidadesService.name);
   constructor(
-    @InjectRepository(Identidad)
-    private readonly identidadRepository: Repository<Identidad>,
+    @InjectRepository(IdentidadesRepository)
+    private identidadRepository: IdentidadesRepository,
   ) {}
 
   async getAll(): Promise<Identidad[]> {

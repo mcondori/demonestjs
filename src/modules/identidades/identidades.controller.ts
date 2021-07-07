@@ -92,3 +92,7 @@ export class IdentidadesController {
       });
   }
 }
+function ApiUseTags(arg0: string) {
+  throw new Error('Function not implemented.');
+}
+

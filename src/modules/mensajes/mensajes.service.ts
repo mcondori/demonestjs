@@ -3,12 +3,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Mensaje } from './entities/mensaje.entity';
 import { CreateMensajeDto } from './dto/create-mensaje-dto';
+import { MensajesRepository } from './mensajes.repository';
 
 @Injectable()
 export class MensajesService {
   constructor(
-    @InjectRepository(Mensaje)
-    private readonly mensajeRepository: Repository<Mensaje>,
+    @InjectRepository(MensajesRepository)
+    private mensajeRepository: MensajesRepository,
   ) {}
 
   async getAll(): Promise<Mensaje[]> {
