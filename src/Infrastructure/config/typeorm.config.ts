@@ -1,14 +1,27 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { ConfigService } from '@nestjs/config';
+import { TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
-export const typeOrmConfig: any = {
-    "type": "postgres",
-    "host": "localhost",
-    "port": 5432,
-    "username": "postgres",
-    "password": "12345678",
-    "database": "hex",
-    "entities": ["dist/**/*{.ts,.js}"],
-    "synchronize": false,
-    "retryDelay": 3000,
-    "retryAttempts": 10
+export default class TypeOrmConfig{
+    static getOrmConfig(configService: ConfigService): TypeOrmModuleOptions{
+        return {
+            type: "postgres",
+            host: configService.get('DB_HOST'),
+            port: configService.get('DB_PORT'),
+            username: configService.get('DB_USERNAME'),
+            password: configService.get('DB_PASSWORD'),
+            database: configService.get('DB_DATABASE'),
+            entities: ["dist/**/*{.ts,.js}"],
+            synchronize: true,
+            retryDelay: 3000,
+            retryAttempts: 10
+        }
+    }
 }
+
+export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {
+    imports: [],
+    useFactory: async (configService: ConfigService): 
+    Promise<TypeOrmModuleOptions> => TypeOrmConfig.
+    getOrmConfig(configService),
+    inject: [ConfigService]
+};
