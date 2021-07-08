@@ -14,7 +14,7 @@ import { Mensaje } from './modules/mensajes/entities/mensaje.entity';
 @Module({
   imports: [
     TypeOrmModule.forRootAsync(typeOrmConfigAsync),
-    TypeOrmModule.forFeature([MensajesRepository, Mensaje]),
+    TypeOrmModule.forFeature([MensajesRepository]),
     IdentidadesModule,
     ConfigModule.forRoot({
       isGlobal: true,
