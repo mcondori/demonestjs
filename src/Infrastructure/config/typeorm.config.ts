@@ -1,4 +1,4 @@
-import { ConfigService } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModuleAsyncOptions, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 export default class TypeOrmConfig{
@@ -13,13 +13,14 @@ export default class TypeOrmConfig{
             entities: ["dist/**/*{.ts,.js}"],
             synchronize: true,
             retryDelay: 3000,
-            retryAttempts: 10
+            retryAttempts: 10,
+            logging: true,
         }
     }
 }
 
 export const typeOrmConfigAsync: TypeOrmModuleAsyncOptions = {
-    imports: [],
+    imports: [ConfigModule],
     useFactory: async (configService: ConfigService): 
     Promise<TypeOrmModuleOptions> => TypeOrmConfig.
     getOrmConfig(configService),
